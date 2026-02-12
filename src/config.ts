@@ -60,7 +60,7 @@ export const siteConfig: SiteConfig = {
 		{
 			name: "Temp Email",
 			url: "https://mali.312522.xyz/",
-			image: "/images/avatar.webp",
+			image: "https://mali.312522.xyz/favicon.ico",
 			description: "实用服务",
 			external: true,
 		},
