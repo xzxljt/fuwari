@@ -12,7 +12,7 @@
 ```json
 {
   "name": "TianTian Blog",
-  "avatar": "https://img.micostar.cc/images/avatar.webp",
+  "avatar": "https://image.cloudrunmax.top/images/avatar.webp",
   "introduction": "爱我所爱，我们是彼此永远的动力",
   "url": "https://blog.312522.xyz"
 }

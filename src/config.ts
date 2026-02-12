@@ -32,12 +32,12 @@ export const siteConfig: SiteConfig = {
 			enable: true, // Display the credit text of the banner image
 			text: "Pixiv @chokei", // Credit text to be displayed
 
-			url: "https://img.micostar.cc/random", // (Optional) URL link to the original artwork or artist's page
+			url: "https://image.cloudrunmax.top/random", // (Optional) URL link to the original artwork or artist's page
 		},
 	},
 	background: {
 		enable: true, // Enable background image
-		src: "https://img.micostar.cc/random", // 优先使用新 API
+		src: "https://image.cloudrunmax.top/random", // 优先使用新 API
 		position: "center", // Background position: 'top', 'center', 'bottom'
 		size: "cover", // Background size: 'cover', 'contain', 'auto'
 		repeat: "no-repeat", // Background repeat: 'no-repeat', 'repeat', 'repeat-x', 'repeat-y'
@@ -95,13 +95,13 @@ export const licenseConfig: LicenseConfig = {
 //图片回退
 export const imageFallbackConfig: ImageFallbackConfig = {
 	enable: true,
-	originalDomain: "img.micostar.cc", // 主力图床 (新项目)
-	fallbackDomain: "image.cloudrunmax.top", // R2 备用图床 (旧项目)
+	originalDomain: "image.cloudrunmax.top", // 主力图床
+	fallbackDomain: "img.micostar.cc", // 备用图床
 };
 
 export const umamiConfig: UmamiConfig = {
 	enable: true,
-	baseUrl: "https://umami.micostar.cc",
+	baseUrl: "https://umami.312522.xyz",
 	shareId: "X9ZZZ5l2xErS44Rc",
 	timezone: "Asia/Shanghai",
 };
