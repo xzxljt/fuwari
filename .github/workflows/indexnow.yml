@@ -1,0 +1,90 @@
+name: IndexNow Auto Submit
+
+on:
+  # 当有新的推送到 main 分支时触发
+  push:
+    branches: [ main ]
+  
+  # 手动触发
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: '提交原因'
+        required: false
+        default: 'Manual submission'
+
+jobs:
+  submit-indexnow:
+    name: Submit URLs to IndexNow
+    runs-on: ubuntu-latest
+    environment: Production
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9.14.4
+        
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+
+    # 恢复上次的提交记录缓存
+    - name: Restore IndexNow submission cache
+      uses: actions/cache/restore@v4
+      id: cache-restore
+      with:
+        path: .indexnow-submitted.json
+        key: indexnow-submitted-${{ github.ref_name }}
+        restore-keys: |
+          indexnow-submitted-
+
+    - name: Show cache status
+      run: |
+        if [ "${{ steps.cache-restore.outputs.cache-hit }}" == "true" ]; then
+          echo "✅ 缓存命中，已恢复上次提交记录"
+          cat .indexnow-submitted.json | head -20
+        else
+          echo "ℹ️ 未找到缓存，将作为首次提交"
+        fi
+      
+    - name: Build site
+      run: pnpm build
+      
+    - name: Submit to IndexNow (Incremental)
+      env:
+        INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
+        INDEXNOW_HOST: ${{ vars.INDEXNOW_HOST }}
+      run: |
+        echo "Starting IndexNow incremental submission..."
+        if pnpm submit-indexnow-inc; then
+          echo "✅ IndexNow incremental submission successful"
+        else
+          echo "❌ IndexNow submission failed, but continuing..."
+          exit 0
+        fi
+      continue-on-error: true
+
+    # 保存更新后的提交记录到缓存
+    - name: Save IndexNow submission cache
+      uses: actions/cache/save@v4
+      if: always()
+      with:
+        path: .indexnow-submitted.json
+        key: indexnow-submitted-${{ github.ref_name }}-${{ github.run_id }}
+      
+    - name: Report status
+      if: always()
+      run: |
+        echo "IndexNow submission workflow completed"
+        if [ -f .indexnow-submitted.json ]; then
+          echo "📊 当前提交记录:"
+          cat .indexnow-submitted.json | head -20
+        fi

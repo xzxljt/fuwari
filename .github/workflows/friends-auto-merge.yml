@@ -1,0 +1,112 @@
+name: Auto Merge Friends PR
+
+on:
+  pull_request_target:
+    paths:
+      - "src/content/friends/*.json"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'Besty0728'
+    steps:
+      - name: Debug Info
+        run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "PR Number: ${{ github.event.pull_request.number }}"
+          echo "Base SHA: ${{ github.event.pull_request.base.sha }}"
+          echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
+
+      - name: Checkout PR Head
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: |
+          echo "Installing dependencies..."
+          pnpm install
+
+      - name: Verify Changed Files
+        id: verify
+        run: |
+          echo "Verifying changed files..."
+          # 获取变更文件名
+          # 在 pull_request_target 中，我们比较 PR head 和 base
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
+
+          echo "Changed files list:"
+          echo "$CHANGED_FILES"
+
+          # 检查是否有文件变更
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "::error::No files changed found in the diff."
+            exit 1
+          fi
+
+          # 禁止修改的关键文件列表（防止代码注入）
+          FORBIDDEN_PATTERNS=(
+            "package.json"
+            "package-lock.json"
+            "pnpm-lock.yaml"
+            "astro.config.*"
+            "vite.config.*"
+            "tailwind.config.*"
+            "tsconfig.*"
+            ".github/"
+            "scripts/"
+            "*.js"
+            "*.ts"
+            "*.mjs"
+            "*.cjs"
+            "*.astro"
+            "*.svelte"
+          )
+
+          for file in $CHANGED_FILES; do
+            # 检查是否为友链 JSON 文件
+            if [[ ! "$file" =~ ^src/content/friends/.*\.json$ ]]; then
+              echo "::error::File $file is not a permitted path. Only src/content/friends/*.json is allowed."
+              exit 1
+            fi
+
+            # 额外检查禁止的文件模式
+            for pattern in "${FORBIDDEN_PATTERNS[@]}"; do
+              if [[ "$file" == *"$pattern"* ]]; then
+                echo "::error::File $file matches forbidden pattern: $pattern"
+                exit 1
+              fi
+            done
+          done
+
+          echo "✅ Security check passed: All changed files are valid friend link JSON files."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Check
+        run: |
+          echo "Starting Astro build to verify changes..."
+          pnpm build
+          echo "Build successful."
+
+      - name: Auto Merge
+        run: |
+          echo "Merging PR #${{ github.event.pull_request.number }}..."
+          gh pr merge ${{ github.event.pull_request.number }} --squash --subject "🤝 友链申请：欢迎 ${{ github.event.pull_request.user.login }}" --body "友链机器人自动验证通过 ✅"
+          echo "PR merged successfully."
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
