@@ -74,7 +74,6 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Friends,
 		LinkPreset.Apps,
 		LinkPreset.Donate,
-		LinkPreset.Status,
 		LinkPreset.Monitor,
 	],
 };
