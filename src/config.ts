@@ -32,17 +32,17 @@ export const siteConfig: SiteConfig = {
 			enable: true, // Display the credit text of the banner image
 			text: "Pixiv @chokei", // Credit text to be displayed
 
-			url: "https://img.micostar.cc/random", // (Optional) URL link to the original artwork or artist's page
+			url: "https://image.cloudrunmax.top/random", // (Optional) URL link to the original artwork or artist's page
 		},
 	},
 	background: {
 		enable: true, // Enable background image
-		src: "https://p.2x.nz/random/h", // 使用 p.2x.nz 随机图 API (横屏)
+		src: "https://p.2x.nz/random/h", // Background image URL (supports HTTPS)
 		position: "center", // Background position: 'top', 'center', 'bottom'
 		size: "cover", // Background size: 'cover', 'contain', 'auto'
 		repeat: "no-repeat", // Background repeat: 'no-repeat', 'repeat', 'repeat-x', 'repeat-y'
 		attachment: "fixed", // Background attachment: 'fixed', 'scroll', 'local'
-		opacity: 0.5, // Background opacity (0-1)
+		opacity: 1, // Background opacity (0-1)
 	},
 	toc: {
 		enable: true, // Display the table of contents on the right side of the post
@@ -101,7 +101,7 @@ export const licenseConfig: LicenseConfig = {
 //图片回退
 export const imageFallbackConfig: ImageFallbackConfig = {
 	enable: true,
-	originalDomain: "img.micostar.cc", // 主力图床
+	originalDomain: "image.cloudrunmax.top", // 主力图床
 	fallbackDomain: "image.cloudrunmax.top", // 备用图床
 };
 
