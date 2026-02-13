@@ -1,6 +1,6 @@
 ---
 title: iFlow CLI 重磅更新：内置智谱 GLM-5 和 MiniMax-M2.5 两大顶流模型
-published: 2026-02-13
+published: 2026-02-13T20:00:00
 description: 阿里心流AI团队推出的免费终端AI智能体iflowCLI迎来重磅更新，内置智谱GLM-5和MiniMax-M2.5两大最新大模型
 image: https://img.312522.xyz/file/1770963306818_Screenshot_2026-02-13-14-14-23-064_com.server.auditor.ssh.client-edit.jpg
 tags: [AI, 开发工具, iflowCLI, 智谱GLM-5, MiniMax]
