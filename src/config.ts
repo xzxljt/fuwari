@@ -51,7 +51,7 @@ export const siteConfig: SiteConfig = {
 	favicon: [
 		// Leave this array empty to use the default favicon
 		{
-			src: "https://img.312522.xyz/file/1770951586899_avatar.webp", // Path of the favicon, relative to the /public directory
+			src: "https://img.312522.xyz/file/1770955681197_TianTian.png", // Path of the favicon, relative to the /public directory
 			//   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
 			//   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
 		},
@@ -61,14 +61,14 @@ export const siteConfig: SiteConfig = {
 			name: "Temp Email",
 			url: "https://mali.312522.xyz/",
 			image: "https://mali.312522.xyz/logo.png",
-			description: "实用服务",
+			description: "临时邮箱",
 			external: true,
 		},
 		{
-			name: "JianKang",
-			url: "https://jk.312522.xyz/",
-			image: "https://img.312522.xyz/file/1770953614467_logo.png",
-			description: "域名监控",
+			name: "导航",
+			url: "https://star.312522.xyz/",
+			image: "https://img.312522.xyz/file/1770951586899_avatar.webp",
+			description: "导航地址",
 			external: true,
 		},
 	],
@@ -86,7 +86,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "/images/avatar.webp", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+	avatar: "https://img.312522.xyz/file/1770955681197_TianTian.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "TianTian",
 	bio: ["爱我所爱，我们是彼此永远的动力"],
 	links: [],
