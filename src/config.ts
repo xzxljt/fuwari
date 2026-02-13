@@ -51,7 +51,7 @@ export const siteConfig: SiteConfig = {
 	favicon: [
 		// Leave this array empty to use the default favicon
 		{
-			src: "https://img.micostar.cc/images/avatar.webp", // Path of the favicon, relative to the /public directory
+			src: "https://img.312522.xyz/file/1770951586899_avatar.webp", // Path of the favicon, relative to the /public directory
 			//   theme: 'light',              // (Optional) Either 'light' or 'dark', set only if you have different favicons for light and dark mode
 			//   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
 		},
@@ -62,6 +62,13 @@ export const siteConfig: SiteConfig = {
 			url: "https://mali.312522.xyz/",
 			image: "https://mali.312522.xyz/logo.png",
 			description: "实用服务",
+			external: true,
+		},
+		{
+			name: "JianKang",
+			url: "https://jk.312522.xyz/",
+			image: "https://img.312522.xyz/file/1770953614467_logo.png",
+			description: "域名监控",
 			external: true,
 		},
 	],
