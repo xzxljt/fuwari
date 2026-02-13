@@ -11,8 +11,12 @@ let progress = $state(0);
 let visible = $state(false);
 
 // 订阅 store
-const unsubProgress = readingProgress.subscribe((v) => (progress = v));
-const unsubVisible = isPostPage.subscribe((v) => (visible = v));
+const unsubProgress = readingProgress.subscribe((v) => {
+	progress = v;
+});
+const unsubVisible = isPostPage.subscribe((v) => {
+	visible = v;
+});
 
 onMount(() => {
 	initReadingProgress();

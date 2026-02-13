@@ -32,7 +32,7 @@ function getGitDate(id: string) {
 			`git log --diff-filter=A --follow --format=%aI -1 -- "${filePath}"`,
 			{ encoding: "utf-8" },
 		);
-		if (output && output.trim()) {
+		if (output?.trim()) {
 			const date = new Date(output.trim());
 			gitDateCache.set(id, date);
 			return date;
@@ -48,7 +48,6 @@ function getGitDate(id: string) {
 
 // 按提交时间排序：越早越靠前 (Ascending)
 friends.sort((a, b) => {
-
 	const dateA = getGitDate(a.id).getTime();
 	const dateB = getGitDate(b.id).getTime();
 

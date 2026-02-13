@@ -1,6 +1,7 @@
 import { defineCollection, z } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 
-const postsCollection = defineCollection({
+const postsCollection: ReturnType<typeof defineCollection> = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		published: z.date(),
@@ -23,7 +24,7 @@ const postsCollection = defineCollection({
 	}),
 });
 
-const specCollection = defineCollection({
+const specCollection: ReturnType<typeof defineCollection> = defineCollection({
 	schema: z.object({
 		title: z.string().optional(),
 		published: z.date().optional(),
@@ -32,7 +33,7 @@ const specCollection = defineCollection({
 	}),
 });
 
-const assetsCollection = defineCollection({
+const assetsCollection: ReturnType<typeof defineCollection> = defineCollection({
 	type: "data",
 	schema: z.object({
 		title: z.string().optional(),
@@ -40,17 +41,24 @@ const assetsCollection = defineCollection({
 	}),
 });
 
-const friendsCollection = defineCollection({
-	type: "data",
-	schema: z.object({
-		name: z.string(),
-		url: z.string(),
-		avatar: z.string(),
-		introduction: z.string(),
-	}),
-});
+const friendsCollection: ReturnType<typeof defineCollection> = defineCollection(
+	{
+		type: "data",
+		schema: z.object({
+			name: z.string(),
+			url: z.string(),
+			avatar: z.string(),
+			introduction: z.string(),
+		}),
+	},
+);
 
-export const collections = {
+export const collections: {
+	posts: ReturnType<typeof defineCollection>;
+	spec: ReturnType<typeof defineCollection>;
+	assets: ReturnType<typeof defineCollection>;
+	friends: ReturnType<typeof defineCollection>;
+} = {
 	posts: postsCollection,
 	spec: specCollection,
 	assets: assetsCollection,

@@ -5,9 +5,10 @@
 import { writable } from "svelte/store";
 
 // 共享状态
-export const readingProgress = writable(0);
-export const isPostPage = writable(false);
-export const showFixedBar = writable(false);
+export const readingProgress: ReturnType<typeof writable<number>> = writable(0);
+export const isPostPage: ReturnType<typeof writable<boolean>> = writable(false);
+export const showFixedBar: ReturnType<typeof writable<boolean>> =
+	writable(false);
 
 let initialized = false;
 let cleanup: (() => void) | null = null;
@@ -45,7 +46,7 @@ function updateProgress() {
 	readingProgress.set(progress);
 }
 
-export function initReadingProgress() {
+export function initReadingProgress(): void {
 	const isPost = window.location.pathname.includes("/posts/");
 	isPostPage.set(isPost);
 
@@ -73,7 +74,7 @@ export function initReadingProgress() {
 	}
 }
 
-export function destroyReadingProgress() {
+export function destroyReadingProgress(): void {
 	if (cleanup) {
 		cleanup();
 		cleanup = null;

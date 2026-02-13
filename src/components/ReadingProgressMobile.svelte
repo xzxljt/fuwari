@@ -16,9 +16,15 @@ let visible = $state(false);
 let showFixed = $state(false);
 
 // 订阅 store
-const unsubProgress = readingProgress.subscribe((v) => (progress = v));
-const unsubVisible = isPostPage.subscribe((v) => (visible = v));
-const unsubFixed = showFixedBar.subscribe((v) => (showFixed = v));
+const unsubProgress = readingProgress.subscribe((v) => {
+	progress = v;
+});
+const unsubVisible = isPostPage.subscribe((v) => {
+	visible = v;
+});
+const unsubFixed = showFixedBar.subscribe((v) => {
+	showFixed = v;
+});
 
 onMount(() => {
 	initReadingProgress();
