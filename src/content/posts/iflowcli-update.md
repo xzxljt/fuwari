@@ -10,11 +10,11 @@ draft: false
 
 # iFlow CLI 重磅更新：内置智谱 GLM-5 和 MiniMax-M2.5 两大顶流模型
 
+![iflowCLI](https://img.312522.xyz/file/1770963306818_Screenshot_2026-02-13-14-14-23-064_com.server.auditor.ssh.client-edit.jpg)
+
 对于开发者而言，高效又免费的 AI 编程助手堪称"摸鱼神器"。不用切换窗口、不用繁琐配置、无需付费，打开终端就能调用 AI 搞定代码相关需求，这样的工具谁能拒绝？
 
 就在刚刚，阿里心流 AI 团队推出的免费终端 AI 智能体 iflowCLI 迎来重磅更新，核心亮点的是内置智谱 GLM-5 和 MiniMax-M2.5 两大最新大模型，开发者必冲！
-
-![iflowCLI](https://img.312522.xyz/file/1770963306818_Screenshot_2026-02-13-14-14-23-064_com.server.auditor.ssh.client-edit.jpg)
 
 ## 两大顶流模型内置，实现"模型自由"
 
